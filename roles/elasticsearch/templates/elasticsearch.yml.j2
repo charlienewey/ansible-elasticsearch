@@ -1,0 +1,17 @@
+# Cluster name (for network discovery)
+cluster.name: ceda
+
+# Master node name / address
+node.master: {{ master }}
+
+# HTTP settings
+http.port: 9200
+transport.tcp.port: 9300
+transport.tcp.compress: true
+
+# Index settings
+index.number_of_shards: 5
+index.number_of_replicas: 1
+
+# Memory settings
+bootstrap.mlockall: true
