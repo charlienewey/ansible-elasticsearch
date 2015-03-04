@@ -1,0 +1,9 @@
+[masters]
+machine1
+
+[workers]
+machine-2
+
+[all:children]
+masters
+workers

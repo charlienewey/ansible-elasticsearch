@@ -1,0 +1,6 @@
+---
+- name: remove incorrect java distribution
+  yum: name=java-gcj state=absent
+
+- name: install openjdk java
+  yum: name=java-openjdk state=latest

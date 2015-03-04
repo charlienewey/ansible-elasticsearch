@@ -1,0 +1,9 @@
+---
+- name: Deploy an Elasticsearch Cluster
+  sudo: yes
+  hosts: all
+  roles:
+    - update
+    - java
+    - elasticsearch
+    - iptables
