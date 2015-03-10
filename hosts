@@ -1,5 +1,5 @@
 [masters]
-machine-1
+fatcat-test.jc.rl.ac.uk
 
 [workers]
 machine-2

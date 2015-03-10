@@ -1,7 +1,10 @@
 ---
 - name: copy elasticsearch backup script
-  copy: src=files/elasticsearch_backup.sh dest=/usr/bin/elasticsearch_backup.sh
+  copy: src=elasticsearch_backup.sh dest=/usr/bin/elasticsearch_backup.sh
 
 - name: add cron job to backup elasticsearch
-  cron: cron_file=/etc/crontab name="elasticsearch_backup" special_time=weekly
-        job="sh /usr/bin/elasticsearch_backup.sh 2>&1 > /dev/null" state=present
+  cron: cron_file=elasticsearch_backup name="elasticsearch_backup"
+        user=elasticsearch
+        special_time=weekly
+        job="sh /usr/bin/elasticsearch_backup.sh 2>&1 > /dev/null"
+        state=present

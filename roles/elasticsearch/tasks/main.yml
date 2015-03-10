@@ -8,19 +8,23 @@
 - name: copy elasticsearch repository definition
   copy: src=elasticsearch.repo dest=/etc/yum.repos.d/elasticsearch.repo
 
-- name: install latest elasticsearch
-  yum: pkg=elasticsearch state=latest enablerepo=elasticsearch-1.4
-  notify:
-    - restart elasticsearch
+- name: install elasticsearch
+  yum: pkg=elasticsearch state=present enablerepo=elasticsearch-1.4
 
 - name: template elasticsearch configuration file
-  template: src=templates/elasticsearch.yml.j2
+  template: src=elasticsearch.yml.j2
             dest=/etc/elasticsearch/elasticsearch.yml
   notify:
     - restart elasticsearch
 
 - name: template elasticsearch sysconfig file
-  template: src=templates/elasticsearch_sysconfig.j2
+  template: src=elasticsearch_sysconfig.j2
             dest=/etc/sysconfig/elasticsearch
   notify:
     - restart elasticsearch
+    
+- name: create snapshot directory
+  shell: mkdir /elasticsearch_snapshot
+  
+- name: create snapshot repository in elasticsearch
+  shell: curl -XPUT http://localhost:9200/_snapshot/backup -d "{'type'":" 'fs','settings'":" {'location'":" '/elasticsearch_snapshot','compress":" true}}"
