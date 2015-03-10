@@ -1,5 +1,5 @@
 [masters]
-machine1
+machine-1
 
 [workers]
 machine-2

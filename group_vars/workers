@@ -1,1 +1,1 @@
-role: worker
+master: false

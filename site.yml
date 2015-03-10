@@ -3,7 +3,14 @@
   sudo: yes
   hosts: all
   roles:
-    - update
+    - common
     - java
     - elasticsearch
-    - iptables
+    # - iptables
+    
+- name: Deploy nginx on the master nodes
+  sudo: yes
+  hosts: masters
+  roles:
+    - cron
+    - nginx
