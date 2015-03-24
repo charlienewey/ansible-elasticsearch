@@ -1,16 +1,25 @@
 ---
-- name: Deploy an Elasticsearch Cluster
+- name:
   sudo: yes
   hosts: all
   roles:
     - common
+
+- name: deploy elasticsearch cluster
+  sudo: yes
+  hosts: elasticsearch
+  roles:
     - java
     - elasticsearch
-    # - iptables
-    
-- name: Deploy nginx on the master nodes
+
+- name: set up cron backup on the master nodes
   sudo: yes
   hosts: masters
   roles:
     - cron
+
+- name: deploy nginx on web server
+  sudo: yes
+  hosts: web
+  roles:
     - nginx

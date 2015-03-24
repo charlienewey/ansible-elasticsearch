@@ -22,9 +22,3 @@
             dest=/etc/sysconfig/elasticsearch
   notify:
     - restart elasticsearch
-    
-- name: create snapshot directory
-  shell: mkdir /elasticsearch_snapshot
-  
-- name: create snapshot repository in elasticsearch
-  shell: curl -XPUT http://localhost:9200/_snapshot/backup -d "{'type'":" 'fs','settings'":" {'location'":" '/elasticsearch_snapshot','compress":" true}}"

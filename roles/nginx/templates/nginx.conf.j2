@@ -4,12 +4,14 @@ events {
 
 http {
     upstream elasticsearch {
-            server 127.0.0.1:9200;
+        {% for host in groups["masters"] %}
+        server {{host}}:{{es_port}};
+        {% endfor %}
     }
-    
+
     server {
         listen 80;
-        
+
         access_log /var/log/elasticsearch_access.log;
         error_log /var/log/elasticsearch_error.log;
 
@@ -21,7 +23,7 @@ http {
             proxy_set_header Host $host;
             proxy_pass http://elasticsearch;
         }
-        
+
         if ($request_method != GET) {
             return 403;
         }

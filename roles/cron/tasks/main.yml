@@ -1,8 +1,18 @@
 ---
-- name: copy elasticsearch backup script
+- name: create directory for elasticsearch snapshot data
+  shell: mkdir /elasticsearch
+
+- name: copy snapshot repository creation script
+  copy: src=elasticsearch_snapshot_create.sh dest=/tmp/elasticsearch_snapshot_create.sh
+
+- name: create snapshot repository with curl script
+  shell: sh elasticsearch_snapshot_create.sh
+         chdir=/tmp
+
+- name: copy elasticsearch backup cron script
   copy: src=elasticsearch_backup.sh dest=/usr/bin/elasticsearch_backup.sh
 
-- name: add cron job to backup elasticsearch
+- name: create cron job to run backup script weekly
   cron: cron_file=elasticsearch_backup name="elasticsearch_backup"
         user=elasticsearch
         special_time=weekly

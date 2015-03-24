@@ -1,9 +1,12 @@
+#[web]
+# light.ceda.ac.uk
+
 [masters]
-fatcat-test.jc.rl.ac.uk
+jasmin-es1.ceda.ac.uk
 
 [workers]
-machine-2
+jasmin-es2.ceda.ac.uk
 
-[all:children]
+[elasticsearch:children]
 masters
 workers
