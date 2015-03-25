@@ -1,3 +1,16 @@
 ---
+- name: add site proxy to system environment variables
+  lineinfile:
+    dest: /etc/environment
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+  with_items:
+    - { regexp: "^http_proxy", line: "http_proxy=http://wwwcache.rl.ac.uk:8080/" }
+    - { regexp: "^https_proxy", line: "https_proxy=http://wwwcache.rl.ac.uk:8080/" }
+    - { regexp: "^HTTP_PROXY", line: "HTTP_PROXY=http://wwwcache.rl.ac.uk:8080/" }
+    - { regexp: "^HTTPS_PROXY", line: "HTTPS_PROXY=http://wwwcache.rl.ac.uk:8080/" }
+    - { regexp: "^no_proxy", line: "no_proxy=localhost,127.0.0.1" }
+    - { regexp: "^NO_PROXY", line: "NO_PROXY=localhost,127.0.0.1" }
+
 - name: upgrade all packages
   yum: name=* state=latest

@@ -1,5 +1,5 @@
 ---
-- name:
+- name: set up proxy and update all machines
   sudo: yes
   hosts: all
   roles:

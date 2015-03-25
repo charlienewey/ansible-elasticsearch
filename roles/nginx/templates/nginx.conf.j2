@@ -4,9 +4,9 @@ events {
 
 http {
     upstream elasticsearch {
-        {% for host in groups["masters"] %}
+    {% for host in groups["masters"] %}
         server {{host}}:{{es_port}};
-        {% endfor %}
+    {% endfor %}
     }
 
     server {
