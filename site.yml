@@ -3,7 +3,8 @@
   sudo: yes
   hosts: all
   roles:
-    - common
+    - proxy
+    - update
 
 - name: deploy elasticsearch cluster
   sudo: yes
@@ -22,4 +23,4 @@
   sudo: yes
   hosts: web
   roles:
-    - nginx
+    - apache

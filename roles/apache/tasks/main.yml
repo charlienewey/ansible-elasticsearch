@@ -9,3 +9,11 @@
 
 - name: ensure apache is running
   service: name=httpd state=started
+  
+- name: allow apache through firewall
+  command: /sbin/iptables -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
+
+- name: make iptables configuration peristent
+  shell: /sbin/iptables-save
+  notify:
+    - restart iptables

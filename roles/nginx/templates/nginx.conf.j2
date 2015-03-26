@@ -4,9 +4,7 @@ events {
 
 http {
     upstream elasticsearch {
-    {% for host in groups["masters"] %}
-        server {{host}}:{{es_port}};
-    {% endfor %}
+        {% for host in groups["masters"] %}server {{host}}:{{es_port}};{% endfor %}
     }
 
     server {
@@ -15,7 +13,7 @@ http {
         access_log /var/log/elasticsearch_access.log;
         error_log /var/log/elasticsearch_error.log;
 
-        server_name {{ inventory_hostname }};
+        server_name {{inventory_hostname}};
 
         location / {
             proxy_set_header X-Real-IP  $remote_addr;

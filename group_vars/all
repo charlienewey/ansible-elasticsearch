@@ -1,2 +1,4 @@
+admin_ips:
+  - 127.0.0.1
 es_port: 9200
 es_max_port: 9400
