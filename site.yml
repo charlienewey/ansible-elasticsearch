@@ -20,7 +20,7 @@
     - elasticsearch-plugins
     - cron
 
-- name: deploy nginx on web server
+- name: deploy web server
   sudo: yes
   hosts: web
   roles:
