@@ -17,6 +17,7 @@
   sudo: yes
   hosts: masters
   roles:
+    - elasticsearch-plugins
     - cron
 
 - name: deploy nginx on web server

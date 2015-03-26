@@ -1,0 +1,24 @@
+---
+- name: download elasticsearch-head plugin
+  get_url:
+    url=http://github.com/mobz/elasticsearch-head/archive/master.zip
+    use_proxy=yes
+    dest=/tmp/head.zip
+    
+- name: install elasticsearch-head plugin
+  shell: /usr/share/elasticsearch/bin/plugin --install head --url file:///tmp/head.zip
+  register: head_installed
+  changed_when: head_installed.rc != 74
+  ignore_errors: yes
+    
+- name: download bigdesk plugin
+  get_url:
+    url=http://github.com/lukas-vlcek/bigdesk/archive/master.zip
+    use_proxy=yes
+    dest=/tmp/bigdesk.zip
+    
+- name: install bigdesk plugin
+  shell: /usr/share/elasticsearch/bin/plugin --install bigdesk --url file:///tmp/bigdesk.zip
+  register: bigdesk_installed
+  changed_when: bigdesk_installed.rc != 74
+  ignore_errors: yes
