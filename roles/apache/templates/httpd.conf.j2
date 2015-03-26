@@ -2,7 +2,7 @@
     ServerName {{ansible_fqdn}}
     
     <Proxy balancer://main>
-        {% for host in groups["masters"] %}BalancerMember http://{{host}}:{{es_port}} max=1 retry=5{% endfor %}
+        {% for host in groups["masters"] %}BalancerMember http://{{host}}:{{es_port}}/_search max=1 retry=5{% endfor %}
          
         <Limit GET >
             order deny,allow
