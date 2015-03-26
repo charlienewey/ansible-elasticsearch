@@ -2,5 +2,8 @@
 - name: restart elasticsearch
   service: name=elasticsearch state=restarted enabled=yes
   
+- name: start elasticsearch
+  service: name=elasticsearch state=restarted enabled=yes
+  
 - name: restart iptables
   service: name=iptables state=restarted

@@ -2,7 +2,7 @@
 cluster.name: ceda
 
 # Master node name / address
-node.master: {{ master }}
+node.master: {{master}}
 
 # HTTP settings
 http.port: 9200
@@ -15,3 +15,12 @@ index.number_of_replicas: 1
 
 # Memory settings
 bootstrap.mlockall: true
+
+# Configuration locations
+path.conf: /etc/elasticsearch
+path.logs: /var/log/elasticsearch
+
+# Cluster discovery
+discovery.zen.minimum_master_nodes: 1
+discovery.zen.ping.timeout: 3s
+discovery.zen.ping.unicast.hosts: [{% for ip in groups["elasticsearch"] %}{{ip}}, {% endfor %}]

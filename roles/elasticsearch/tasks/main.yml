@@ -16,12 +16,14 @@
             dest=/etc/elasticsearch/elasticsearch.yml
   notify:
     - restart elasticsearch
+    - start elasticsearch
 
 - name: template elasticsearch sysconfig file
   template: src=elasticsearch_sysconfig.j2
             dest=/etc/sysconfig/elasticsearch
   notify:
     - restart elasticsearch
+    - start elasticsearch
     
 - name: allow elasticsearch through firewall
   command: /sbin/iptables -A INPUT -p tcp -m tcp --dport {{ es_port }}:{{ es_max_port }} -j ACCEPT
