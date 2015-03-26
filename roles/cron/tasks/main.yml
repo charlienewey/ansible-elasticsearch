@@ -1,7 +1,4 @@
 ---
-- name: create directory for elasticsearch snapshot data
-  shell: mkdir -p /elasticsearch
-
 - name: copy snapshot repository creation script
   copy: src=elasticsearch_snapshot_create.sh dest=/tmp/elasticsearch_snapshot_create.sh
 
