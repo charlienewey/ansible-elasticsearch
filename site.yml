@@ -24,4 +24,4 @@
   sudo: yes
   hosts: web
   roles:
-    - apache
+    - nginx
