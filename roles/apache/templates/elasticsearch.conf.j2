@@ -1,23 +1,35 @@
-<VirtualHost *:80>
+<VirtualHost *:{{es_safe_port}}>
     ServerName {{ansible_fqdn}}
-    
+
     <Proxy balancer://main>
-        {% for host in groups["masters"] %}BalancerMember http://{{host}}:{{es_port}}/_search max=1 retry=5{% endfor %}
-         
-        <Limit GET >
+        {% for host in groups["masters"] %}BalancerMember http://{{host}}:{{es_port}}/ max=1 retry=5{% endfor %}
+
+        <Limit GET>
             order deny,allow
             allow from all
         </Limit>
-         
+
         <Limit POST PUT DELETE>
             order deny,allow
             deny from all
-            
-            {% for ip in admin_ips %}allow from {{ip}}{% endfor %}
-            
+
+{% for ip in admin_ips %}
+        allow from {{ip}}
+{% endfor %}
+
         </Limit>
     </Proxy>
-    
+
     ProxyPass /es balancer://main/
     ProxyPassReverse /es balancer://main/
+
+    <Location *>
+        order deny,allow
+        deny from all
+    </Location>
+
+    <Location _search/*>
+        order deny,allow
+        allow from all
+    </Location>
 </VirtualHost>

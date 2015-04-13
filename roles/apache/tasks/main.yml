@@ -11,7 +11,7 @@
   service: name=httpd state=started
 
 - name: allow apache through firewall
-  command: /sbin/iptables -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
+  shell: "/sbin/iptables -A INPUT -p tcp -m tcp --dport {{es_safe_port | quote}} -j ACCEPT"
 
 - name: make iptables configuration peristent
   shell: /sbin/iptables-save
