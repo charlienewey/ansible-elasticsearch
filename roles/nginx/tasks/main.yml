@@ -3,7 +3,7 @@
   service: name=httpd state=stopped enabled=no
 
 - name: remove apache
-  yum: name=apache state=absent
+  yum: name=httpd state=absent
 
 - name: install nginx
   yum: name=nginx state=present
