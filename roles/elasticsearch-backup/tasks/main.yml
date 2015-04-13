@@ -1,8 +1,15 @@
 ---
+- name: create elasticsearch snapshot repository directory
+  shell: mkdir /elasticsearch
+         creates=/elasticsearch
+
+- name: put proper permissions on elasticsearch snapshot repository
+  shell: chown elasticsearch:elasticsearch /elasticsearch
+
 - name: copy snapshot repository creation script
   copy: src=elasticsearch_snapshot_create.sh dest=/tmp/elasticsearch_snapshot_create.sh
 
-- name: create snapshot repository with curl script
+- name: create snapshot repository in elasticsearch
   shell: sh elasticsearch_snapshot_create.sh
          chdir=/tmp
 
