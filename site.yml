@@ -13,12 +13,12 @@
     - java
     - elasticsearch
 
-- name: set up cron backup on the master nodes
+- name: set up elasticsearch backup with cron on the master nodes
   sudo: yes
   hosts: masters
   roles:
     - elasticsearch-plugins
-    - cron
+    - elasticsearch-backup
 
 - name: deploy reverse proxy for elasticsearch
   sudo: yes
