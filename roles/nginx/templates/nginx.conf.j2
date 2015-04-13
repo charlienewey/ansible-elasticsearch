@@ -5,6 +5,7 @@ events {
 http {
     upstream elasticsearch {
         {% for host in groups["masters"] %}server {{host}}:{{es_port}};{% endfor %}
+
     }
 
     server {
@@ -13,17 +14,19 @@ http {
         access_log /var/log/elasticsearch_access.log;
         error_log /var/log/elasticsearch_error.log;
 
+        server_tokens off;
         server_name {{inventory_hostname}};
 
-        location / {
+        location ~* ^(/_search) {
             proxy_set_header X-Real-IP $remote_addr;
             proxy_set_header X-Forwarded-For $remote_addr;
             proxy_set_header Host $host;
             proxy_pass http://elasticsearch;
         }
 
-        if ($request_method != GET) {
+        location / {
             return 403;
+            break;
         }
     }
 }
