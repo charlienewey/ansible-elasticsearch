@@ -24,9 +24,9 @@
   notify:
     - restart elasticsearch
     - start elasticsearch
-    
+
 - name: allow elasticsearch through firewall
-  shell: "/sbin/iptables -A INPUT -p tcp -m tcp --dport {{es_port | quote}}:{{es_max_port | quote}} -j ACCEPT"
+  shell: "/sbin/iptables -A INPUT -p tcp -m tcp --dport {{es_port}}:{{es_max_port}} -j ACCEPT"
 
 - name: make iptables configuration peristent
   shell: /sbin/iptables-save

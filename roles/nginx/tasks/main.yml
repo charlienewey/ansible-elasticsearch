@@ -1,6 +1,7 @@
 ---
 - name: stop httpd
   service: name=httpd state=stopped enabled=no
+  ignore_errors: true
 
 - name: remove apache
   yum: name=httpd state=absent
@@ -17,7 +18,7 @@
   service: name=nginx state=started
 
 - name: allow nginx through firewall
-  shell: "/sbin/iptables -A INPUT -p tcp -m tcp --dport {{es_safe_port | quote}} -j ACCEPT"
+  shell: "/sbin/iptables -A INPUT -p tcp -m tcp --dport {{es_safe_port}} -j ACCEPT"
 
 - name: make iptables configuration peristent
   shell: /sbin/iptables-save
