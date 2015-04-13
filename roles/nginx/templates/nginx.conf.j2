@@ -8,7 +8,7 @@ http {
     }
 
     server {
-        listen 80;
+        listen {{es_safe_port}};
 
         access_log /var/log/elasticsearch_access.log;
         error_log /var/log/elasticsearch_error.log;
@@ -16,7 +16,7 @@ http {
         server_name {{inventory_hostname}};
 
         location / {
-            proxy_set_header X-Real-IP  $remote_addr;
+            proxy_set_header X-Real-IP $remote_addr;
             proxy_set_header X-Forwarded-For $remote_addr;
             proxy_set_header Host $host;
             proxy_pass http://elasticsearch;
