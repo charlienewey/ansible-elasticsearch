@@ -20,8 +20,8 @@
     - elasticsearch-plugins
     - cron
 
-- name: deploy web server
+- name: deploy reverse proxy for elasticsearch
   sudo: yes
-  hosts: web
+  hosts: reverse-proxy
   roles:
     - nginx
