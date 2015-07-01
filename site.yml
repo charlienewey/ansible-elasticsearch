@@ -1,9 +1,8 @@
 ---
-- name: set up proxy and update all machines
+- name: update all machines
   sudo: yes
   hosts: all
   roles:
-    - proxy
     - update
 
 - name: deploy elasticsearch cluster
@@ -13,15 +12,8 @@
     - java
     - elasticsearch
 
-- name: set up elasticsearch backup with cron on the master nodes
+- name: set up elasticsearch plugins
   sudo: yes
   hosts: masters
   roles:
     - elasticsearch-plugins
-    - elasticsearch-backup
-
-- name: deploy reverse proxy for elasticsearch
-  sudo: yes
-  hosts: reverse-proxy
-  roles:
-    - nginx

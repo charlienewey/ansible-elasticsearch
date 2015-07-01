@@ -1,11 +1,8 @@
-[reverse-proxy]
-jasmin-es1.ceda.ac.uk
-
 [masters]
-jasmin-es1.ceda.ac.uk
+188.184.135.18
 
 [workers]
-jasmin-es2.ceda.ac.uk
+188.184.185.141
 
 [elasticsearch:children]
 masters
